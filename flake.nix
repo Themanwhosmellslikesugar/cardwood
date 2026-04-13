@@ -19,6 +19,7 @@
             erlang_28
             postgresql_18
             inotify-tools
+            watchman
             nodejs_24
           ];
 
