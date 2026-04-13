@@ -19,6 +19,7 @@ defmodule Cardwood.DataCase do
   using do
     quote do
       alias Cardwood.Repo
+      alias Ecto.Adapters.SQL.Sandbox
 
       import Ecto
       import Ecto.Changeset
@@ -36,8 +37,8 @@ defmodule Cardwood.DataCase do
   Sets up the sandbox based on the test tags.
   """
   def setup_sandbox(tags) do
-    pid = Ecto.Adapters.SQL.Sandbox.start_owner!(Cardwood.Repo, shared: not tags[:async])
-    on_exit(fn -> Ecto.Adapters.SQL.Sandbox.stop_owner(pid) end)
+    pid = Sandbox.start_owner!(Cardwood.Repo, shared: not tags[:async])
+    on_exit(fn -> Sandbox.stop_owner(pid) end)
   end
 
   @doc """

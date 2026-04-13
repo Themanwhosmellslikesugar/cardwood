@@ -11,7 +11,8 @@ defmodule Cardwood.MixProject do
       aliases: aliases(),
       deps: deps(),
       compilers: [:phoenix_live_view] ++ Mix.compilers(),
-      listeners: [Phoenix.CodeReloader]
+      listeners: [Phoenix.CodeReloader],
+      dialyzer: dialyzer()
     ]
   end
 
@@ -28,6 +29,19 @@ defmodule Cardwood.MixProject do
   def cli do
     [
       preferred_envs: [precommit: :test]
+    ]
+  end
+
+  def dialyzer do
+    [
+      plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
+      plt_add_deps: :app_tree,
+      plt_add_apps: [:mix, :plug, :phoenix],
+      flags: [
+        :error_handling,
+        :underspecs
+      ],
+      list_unused_filters: true
     ]
   end
 
@@ -65,7 +79,10 @@ defmodule Cardwood.MixProject do
       {:gettext, "~> 1.0"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:sobelow, "~> 0.14", only: [:dev, :test], runtime: false, warn_if_outdated: true}
     ]
   end
 
