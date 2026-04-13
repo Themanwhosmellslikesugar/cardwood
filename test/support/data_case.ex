@@ -16,10 +16,11 @@ defmodule Cardwood.DataCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       alias Cardwood.Repo
-      alias Ecto.Adapters.SQL.Sandbox
 
       import Ecto
       import Ecto.Changeset
