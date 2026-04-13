@@ -38,5 +38,6 @@ npm-debug.log
 .direnv/
 .nix-mix/
 .nix-hex/
+.expert/
 
 .zed/
